@@ -17,7 +17,8 @@ app.get('/users', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-  console.log(req.body);
+  const newUser = JSON.parse(req.body);
+  users.push(newUser);
 
   res.set('Access-Control-Allow-Origin', '*');
   res.json(users)
