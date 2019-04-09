@@ -1,12 +1,18 @@
 const express = require('express');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
-let users = [
-  { firstname: 'Misha', lastname: 'Hrynko '},
-  { firstname: 'Petya', lastname: 'Poroh '},
-];
+let users = [];
+
+fs.readFile('./users.json', 'utf8', function(err, data) {
+  if (err) {
+    return;
+  }
+
+  console.log(data);
+});
 
 app.use(bodyParser.text());
 
