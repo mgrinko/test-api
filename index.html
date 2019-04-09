@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<form id="my-form">
+  <h3>Create user</h3>
+
+  <p>
+    <label>
+      Firstname
+      <input name="firstname">
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Lastname
+      <input name="lastname">
+    </label>
+  </p>
+
+  <button>Send</button>
+</form>
+
+<script>
+  const form = document.getElementById('my-form')
+
+  form.onsubmit = (event) => {
+    event.preventDefault();
+
+    const user = {
+      firstname: form.elements.firstname.value,
+      lastname: form.elements.lastname.value,
+    };
+
+    console.log(user);
+  };
+</script>
+
+</body>
+</html>
