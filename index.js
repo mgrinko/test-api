@@ -45,6 +45,27 @@ app.post('/users', (req, res) => {
   res.json(users)
 });
 
+app.post('/users2', (req, res) => {
+  fs.readFile('./users.json', 'utf8', function(err, data) {
+    if (err) {
+      return;
+    }
+
+    users = JSON.parse(data);
+    const newUser = JSON.parse(req.body);
+    users.push(newUser);
+
+    fs.writeFile('./users.json', JSON.stringify(users), function (err) {
+      if (err) {
+        return;
+      }
+
+      res.set('Access-Control-Allow-Origin', '*');
+      res.json(users)
+    });
+  });
+});
+
 app.listen(port, () => console.log(
   `Example app listening on http://127.0.0.1:${port}!`,
 ));
