@@ -31,7 +31,7 @@
 <script>
   const form = document.getElementById('my-form');
   const list = document.getElementById('users');
-  let users = [];
+  let users = [{ firstname: 'Misha', lastname: 'Hrynko '}];
 
   render();
 
@@ -43,7 +43,8 @@
       lastname: form.elements.lastname.value,
     };
 
-    console.log(user);
+    users.push(user);
+    render();
   };
 
   function render() {
