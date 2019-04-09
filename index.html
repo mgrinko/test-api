@@ -26,8 +26,14 @@
   <button>Send</button>
 </form>
 
+<div id="users"></div>
+
 <script>
-  const form = document.getElementById('my-form')
+  const form = document.getElementById('my-form');
+  const list = document.getElementById('users');
+  let users = [];
+
+  render();
 
   form.onsubmit = (event) => {
     event.preventDefault();
@@ -39,6 +45,17 @@
 
     console.log(user);
   };
+
+  function render() {
+    list.innerHTML = `
+      <h3>Users</h3>
+      <ul>
+        ${ users.map(user => `
+          <li>${user.firstname} ${user.lastname}</li>
+        `).join('') }
+      </ul>
+    `;
+  }
 </script>
 
 </body>
