@@ -5,14 +5,28 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 let users = [];
+readUsers();
 
-fs.readFile('./users.json', 'utf8', function(err, data) {
-  if (err) {
-    return;
-  }
+function readUsers() {
+  fs.readFile('./users.json', 'utf8', function(err, data) {
+    if (err) {
+      return;
+    }
 
-  console.log(data);
-});
+    users = JSON.parse(data)
+  });
+}
+
+function writeUsers() {
+  fs.writeFile('./users.json', JSON.stringify(users), function (err) {
+    if (err) {
+      return;
+    }
+    console.log('Saved!');
+  });
+}
+
+
 
 app.use(bodyParser.text());
 
@@ -25,6 +39,7 @@ app.get('/users', (req, res) => {
 app.post('/users', (req, res) => {
   const newUser = JSON.parse(req.body);
   users.push(newUser);
+  writeUsers();
 
   res.set('Access-Control-Allow-Origin', '*');
   res.json(users)
