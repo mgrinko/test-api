@@ -31,9 +31,15 @@
 <script>
   const form = document.getElementById('my-form');
   const list = document.getElementById('users');
-  let users = [{ firstname: 'Misha', lastname: 'Hrynko '}];
-
+  let users = [];
   render();
+
+  fetch('http://127.0.0.1:3000/users')
+    .then(res => res.json())
+    .then(data => {
+      users = data;
+      render();
+    });
 
   form.onsubmit = (event) => {
     event.preventDefault();
